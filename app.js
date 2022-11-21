@@ -1,21 +1,32 @@
-console.log(__filename);
+const http = require('node:http');
+const fs = require('fs');
 
+// Create a local server to receive data from
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        fs.readFile('page/index.html', "utf8", (err, data) => {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+        })
+    }
+    else if (req.url === '/about') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        fs.readFile('page/about.html', "utf8", (err, data) => {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+        })
+    } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        fs.readFile('page/error.html', "utf8", (err, data) => {
+            if (err) throw err;
+            res.write(data);
+            res.end();
+        })
+    }
+});
 
-// const Circle = require('./circle.js');
-
-// //const circle = new Circle();
-
-// console.log(Circle.circum(2))
-// console.log(Circle.area(2))
-
-// const http = require('node:http');
-
-// // Create a local server to receive data from
-// const server = http.createServer((req, res) => {
-//   res.writeHead(200, { 'Content-Type': 'application/json' });
-//   res.end(JSON.stringify({
-//     data: 'Hello World!'
-//   }));
-// });
-
-// server.listen(8000);
+console.log(`server is running at http://localhost:8000/`)
+server.listen(8000);

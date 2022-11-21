@@ -4,6 +4,7 @@
   "description": "This is NodeJs Course taught by Bitfumes",
   "main": "app.js",
   "scripts": {
+    "dev": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

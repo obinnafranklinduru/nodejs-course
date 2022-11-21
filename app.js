@@ -18,6 +18,14 @@ const server = http.createServer((req, res) => {
             res.write(data);
             res.end();
         })
+    } else if (req.url === '/create') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        const data = '<h1>I love coding so much</h1>'
+        fs.appendFile('temp/test.html', data, (err, data) => {
+            if (err) throw err;
+            res.write('File is created');
+            res.end();
+        })
     } else {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         fs.readFile('page/error.html', "utf8", (err, data) => {
